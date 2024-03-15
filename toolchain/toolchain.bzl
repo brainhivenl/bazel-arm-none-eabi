@@ -31,7 +31,8 @@ compatible_cpus = {
 }
 
 hosts = {
-    "darwin_x86_64": ["@platforms//os:macos"],  # Also runs on apple silicon
+    "darwin_x86_64": ["@platforms//os:macos", "@platforms//cpu:x86_64"],
+    "darwin_aarch64": ["@platforms//os:macos", "@platforms//cpu:arm64"],
     "linux_x86_64": ["@platforms//os:linux", "@platforms//cpu:x86_64"],
     "linux_aarch64": ["@platforms//os:linux", "@platforms//cpu:arm64"],
     "windows_x86_64": ["@platforms//os:windows", "@platforms//cpu:x86_64"],
@@ -51,6 +52,10 @@ def arm_none_eabi_toolchain(name, gcc_tool = "gcc", target_compatible_with = [],
     """
 
     for host, exec_compatible_with in hosts.items():
+        # Apple Silicon does not support 9.2.1
+        if host == "darwin_aarch64" and version == "9.2.1":
+            return
+
         cc_arm_none_eabi_config(
             name = "config_{}_{}".format(host, name),
             gcc_repo = "arm_none_eabi_{}".format(host),

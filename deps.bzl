@@ -1,7 +1,7 @@
 """deps.bzl"""
 
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@arm_none_eabi//toolchain:toolchain.bzl", "compatible_cpus", "register_arm_none_eabi_toolchain")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 GCC = {
     "9.2.1": [
@@ -40,6 +40,13 @@ GCC = {
             "build_file": "@arm_none_eabi//toolchain:compiler/nix.BUILD",
             "strip_prefix": "arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi",
             "url": "https://developer.arm.com/-/media/Files/downloads/gnu/13.2.rel1/binrel/arm-gnu-toolchain-13.2.rel1-darwin-x86_64-arm-none-eabi.tar.xz?rev=a3d8c87bb0af4c40b7d7e0e291f6541b&hash=10927356ACA904E1A0122794E036E8DDE7D8435D",
+        },
+        {
+            "name": "arm_none_eabi_darwin_aarch64",
+            "sha256": "39c44f8af42695b7b871df42e346c09fee670ea8dfc11f17083e296ea2b0d279",
+            "build_file": "@arm_none_eabi//toolchain:compiler/nix.BUILD",
+            "strip_prefix": "arm-gnu-toolchain-13.2.Rel1-darwin-arm64-arm-none-eabi",
+            "url": "https://developer.arm.com/-/media/Files/downloads/gnu/13.2.rel1/binrel/arm-gnu-toolchain-13.2.rel1-darwin-arm64-arm-none-eabi.tar.xz?rev=a3d8c87bb0af4c40b7d7e0e291f6541b&hash=10927356ACA904E1A0122794E036E8DDE7D8435D"
         },
         {
             "name": "arm_none_eabi_linux_x86_64",
